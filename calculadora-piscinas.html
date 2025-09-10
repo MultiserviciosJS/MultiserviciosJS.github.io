@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌊 Calculadora Profesional de Piscinas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00a8e8;
+            --secondary: #0077be;
+            --accent: #00d1b2;
+            --light: #f0f9ff;
+            --dark: #0a2540;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --success: #4caf50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e0f7ff, #f0fbff);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab {
+            padding: 12px 25px;
+            background: var(--light);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1f0fa;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin: 30px 0;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Resultados Numéricos */
+        .results-numbers {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .results-numbers h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .results-numbers p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 5px 0;
+            display: inline-block;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        /* Recomendaciones y Plan de Acción */
+        .action-plan {
+            background: #fff8e6;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid var(--warning);
+        }
+
+        .action-plan h3 {
+            color: var(--warning);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .action-plan p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .step {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--success);
+            font-weight: 500;
+        }
+
+        /* Presupuesto */
+        .budget-result {
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid var(--success);
+        }
+
+        .budget-result h3 {
+            color: var(--success);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .budget-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #a5d6a7;
+        }
+
+        .budget-total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-water"></i> Calculadora Profesional de Piscinas</h1>
+            <p class="subtitle">Por Océanos Caseros — Tu aliado en agua cristalina</p>
+        </header>
+
+        <div class="content">
+            <div class="tabs">
+                <button class="tab active" data-tab="calculator">Calculadora</button>
+                <button class="tab" data-tab="guide">Guía por Estado del Agua</button>
+                <button class="tab" data-tab="budget">Presupuesto Mensual</button>
+            </div>
+
+            <!-- Pestaña: Calculadora -->
+            <div class="tab-content active" id="calculator">
+                <h2><i class="fas fa-calculator"></i> Calcula todo lo necesario</h2>
+                <p>Ingresa las medidas y el estado actual del agua. Te diremos exactamente qué hacer.</p>
+
+                <div class="form-group">
+                    <label for="shape"><i class="fas fa-shapes"></i> Forma de la piscina</label>
+                    <select id="shape" onchange="toggleFields()">
+                        <option value="rectangular">Rectangular / Cuadrada</option>
+                        <option value="redonda">Redonda</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="length"><i class="fas fa-arrows-alt-h"></i> Largo (metros)</label>
+                    <input type="number" id="length" placeholder="Ej: 6" step="0.1">
+                </div>
+
+                <div class="form-group" id="widthGroup">
+                    <label for="width"><i class="fas fa-arrows-alt-v"></i> Ancho (metros)</label>
+                    <input type="number" id="width" placeholder="Ej: 4" step="0.1">
+                </div>
+
+                <div class="form-group" id="diameterGroup" style="display: none;">
+                    <label for="diameter"><i class="fas fa-circle"></i> Diámetro (metros)</label>
+                    <input type="number" id="diameter" placeholder="Ej: 5" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="depth1"><i class="fas fa-water"></i> Profundidad más baja (metros)</label>
+                    <input type="number" id="depth1" placeholder="Ej: 1.2" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="depth2"><i class="fas fa-water"></i> Profundidad más honda (metros)</label>
+                    <input type="number" id="depth2" placeholder="Ej: 1.8" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="waterCondition"><i class="fas fa-tint"></i> Estado actual del agua</label>
+                    <select id="waterCondition">
+                        <option value="cristalina">Cristalina (mantenimiento)</option>
+                        <option value="turbia">Turbia (partículas suspendidas)</option>
+                        <option value="verde">Verde (algas)</option>
+                        <option value="irrita">Irrita ojos (pH desbalanceado)</option>
+                        <option value="oliente">Huele a cloro (cloraminas)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="phLevel"><i class="fas fa-flask"></i> pH actual (si lo conoces)</label>
+                    <input type="number" id="phLevel" placeholder="Ej: 7.8" step="0.1" min="0" max="14">
+                </div>
+
+                <button class="btn" onclick="calculateAll()">
+                    <i class="fas fa-magic"></i> Calcular y Recomendar
+                </button>
+
+                <!-- Resultados Numéricos -->
+                <div class="results-numbers" id="resultsNumbers" style="display: none;">
+                    <h3><i class="fas fa-hashtag"></i> Resultados Numéricos</h3>
+                    <p><strong>Volumen estimado:</strong> <span class="highlight" id="volume">--</span> litros</p>
+                    <p><strong>Cloro de Choque:</strong> <span class="highlight" id="shock">--</span> gramos</p>
+                    <p><strong>Cloro de Mantenimiento:</strong> <span class="highlight" id="maintenance">--</span> gramos</p>
+                    <p><strong>Algicida (si aplica):</strong> <span class="highlight" id="algaecide">--</span> ml</p>
+                    <p><strong>Floculante (si aplica):</strong> <span class="highlight" id="flocculant">--</span> ml</p>
+                    <p><strong>pH Increasador (si pH < 7.2):</strong> <span class="highlight" id="phUp">--</span> gramos</p>
+                    <p><strong>pH Decreasador (si pH > 7.6):</strong> <span class="highlight" id="phDown">--</span> gramos</p>
+                    <p><strong>Aumentar Alcalinidad (si < 80 ppm):</strong> <span class="highlight" id="alkalinityUp">--</span> gramos</p>
+                </div>
+
+                <!-- Recomendaciones y Plan de Acción -->
+                <div class="action-plan" id="actionPlanSection" style="display: none;">
+                    <h3><i class="fas fa-clipboard-list"></i> Recomendaciones y Plan de Acción</h3>
+                    <div id="actionSteps">
+                        <!-- Los pasos se generarán aquí dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña: Guía por Estado del Agua -->
+            <div class="tab-content" id="guide">
+                <h2><i class="fas fa-book-medical"></i> Guía por Estado del Agua</h2>
+                <p>¿No sabes qué hacer? Elige el estado de tu piscina y sigue los pasos.</p>
+
+                <div class="action-plan">
+                    <h3><i class="fas fa-check-circle"></i> Agua Cristalina (Mantenimiento)</h3>
+                    <div class="step">1. Agregar cloro de mantenimiento semanal.</div>
+                    <div class="step">2. Revisar pH y alcalinidad.</div>
+                    <div class="step">3. Cepillar paredes y escaleras.</div>
+                    <div class="step">4. Aspirar fondo de la piscina.</div>
+                </div>
+
+                <div class="action-plan">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Agua Turbia (Partículas Suspendidas)</h3>
+                    <div class="step">1. Ajustar pH a 7.4.</div>
+                    <div class="step">2. Agregar floculante según dosis calculada.</div>
+                    <div class="step">3. Apagar bomba y dejar reposar 8-12 horas.</div>
+                    <div class="step">4. Aspirar fondo en modo "Waste" (desecho).</div>
+                    <div class="step">5. Rellenar agua si es necesario.</div>
+                </div>
+
+                <div class="action-plan">
+                    <h3><i class="fas fa-skull-crossbones"></i> Agua Verde (Algas)</h3>
+                    <div class="step">1. Cepillar vigorosamente paredes y fondo.</div>
+                    <div class="step">2. Ajustar pH a 7.4.</div>
+                    <div class="step">3. Agregar cloro de choque (dosificación calculada).</div>
+                    <div class="step">4. Agregar algicida (seguir instrucciones del envase).</div>
+                    <div class="step">5. Dejar bomba encendida 24-48 horas continuas.</div>
+                    <div class="step">6. Aspirar residuos del fondo.</div>
+                </div>
+
+                <div class="action-plan">
+                    <h3><i class="fas fa-eye"></i> Irrita Ojos (pH Desbalanceado)</h3>
+                    <div class="step">1. Medir pH con kit de prueba.</div>
+                    <div class="step">2. Si pH < 7.2 → Agregar pH Increasador (dosificación calculada).</div>
+                    <div class="step">3. Si pH > 7.6 → Agregar pH Decreasador (dosificación calculada).</div>
+                    <div class="step">4. Esperar 4-6 horas con bomba encendida.</div>
+                    <div class="step">5. Volver a medir pH hasta que esté en rango (7.2 - 7.6).</div>
+                </div>
+
+                <div class="action-plan">
+                    <h3><i class="fas fa-wind"></i> Huele a Cloro (Cloraminas)</h3>
+                    <div class="step">1. Aplicar cloro de choque (supercloración) — usar 30 gr/1000L.</div>
+                    <div class="step">2. Dejar bomba encendida mínimo 12 horas.</div>
+                    <div class="step">3. El olor desaparecerá cuando el cloro libre rompa las cloraminas.</div>
+                    <div class="step">4. Volver a medir cloro libre (ideal: 1-3 ppm).</div>
+                </div>
+            </div>
+
+            <!-- Pestaña: Presupuesto Mensual -->
+            <div class="tab-content" id="budget">
+                <h2><i class="fas fa-file-invoice-dollar"></i> Calcula el Presupuesto Mensual</h2>
+                <p>Calcula el costo estimado mensual para tu cliente, incluyendo químicos y mano de obra.</p>
+
+                <div class="form-group">
+                    <label for="budgetVolume"><i class="fas fa-cube"></i> Volumen de la piscina (litros)</label>
+                    <input type="number" id="budgetVolume" placeholder="Ej: 36000" min="0">
+                    <small class="text-muted">Si ya calculaste el volumen, se llenará automáticamente.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="frequency"><i class="fas fa-calendar-alt"></i> Frecuencia de servicio</label>
+                    <select id="frequency">
+                        <option value="1">1 vez por semana</option>
+                        <option value="2">2 veces por semana</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="laborCost"><i class="fas fa-hand-holding-usd"></i> Costo de Mano de Obra por Visita ($)</label>
+                    <input type="number" id="laborCost" placeholder="Ej: 15" value="15" min="0" step="0.5">
+                </div>
+
+                <button class="btn" onclick="calculateBudget()">
+                    <i class="fas fa-calculator"></i> Calcular Presupuesto Mensual
+                </button>
+
+                <div class="budget-result" id="budgetResult" style="display: none;">
+                    <h3><i class="fas fa-receipt"></i> Desglose del Presupuesto Mensual</h3>
+                    <div class="budget-item">
+                        <span>Mano de obra (4 semanas x <span id="visitsPerMonth">--</span> visitas)</span>
+                        <span id="laborTotal">--</span>
+                    </div>
+                    <div class="budget-item">
+                        <span>Cloro de mantenimiento (<span id="chlorineAmount">--</span> gr/mes)</span>
+                        <span id="chlorineCost">--</span>
+                    </div>
+                    <div class="budget-item">
+                        <span>pH Increasador/Decreasador (<span id="phAmount">--</span> gr/mes)</span>
+                        <span id="phCost">--</span>
+                    </div>
+                    <div class="budget-item">
+                        <span>Algicida (<span id="algaecideAmount">--</span> ml/mes)</span>
+                        <span id="algaecideCost">--</span>
+                    </div>
+                    <div class="budget-total">
+                        <strong>Total Mensual Estimado: <span id="totalCost">--</span></strong>
+                    </div>
+                    <p class="mt-3"><small>*Precios de químicos basados en promedio de mercado. Ajusta según tus costos reales.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales para compartir volumen
+        let globalVolume = 0;
+
+        // Cambiar pestañas
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+
+        // Mostrar/Ocultar campos según forma
+        function toggleFields() {
+            const shape = document.getElementById('shape').value;
+            const widthGroup = document.getElementById('widthGroup');
+            const diameterGroup = document.getElementById('diameterGroup');
+
+            if (shape === 'redonda') {
+                widthGroup.style.display = 'none';
+                diameterGroup.style.display = 'block';
+            } else {
+                widthGroup.style.display = 'block';
+                diameterGroup.style.display = 'none';
+            }
+        }
+
+        // Calcular todo
+        function calculateAll() {
+            const shape = document.getElementById('shape').value;
+            const length = parseFloat(document.getElementById('length').value);
+            const width = parseFloat(document.getElementById('width').value);
+            const diameter = parseFloat(document.getElementById('diameter').value);
+            const depth1 = parseFloat(document.getElementById('depth1').value);
+            const depth2 = parseFloat(document.getElementById('depth2').value);
+            const waterCondition = document.getElementById('waterCondition').value;
+            const phLevel = parseFloat(document.getElementById('phLevel').value);
+
+            if (!length || (!width && shape !== 'redonda') || (!diameter && shape === 'redonda') || !depth1 || !depth2) {
+                alert('¡Por favor, completa todos los campos de medidas!');
+                return;
+            }
+
+            let volume = 0;
+
+            if (shape === 'rectangular') {
+                const avgDepth = (depth1 + depth2) / 2;
+                volume = length * width * avgDepth * 1000;
+            } else if (shape === 'redonda') {
+                const radius = diameter / 2;
+                const avgDepth = (depth1 + depth2) / 2;
+                volume = Math.PI * radius * radius * avgDepth * 1000;
+            }
+
+            volume = Math.round(volume);
+            globalVolume = volume; // Guardar para presupuesto
+
+            // Cálculos aproximados
+            const shock = Math.round(volume * 0.02); // 20 gr por 1000L
+            const maintenance = Math.round(volume * 0.005); // 5 gr por 1000L
+            const algaecide = Math.round(volume * 0.001); // 1 ml por 1000L
+            const flocculant = Math.round(volume * 0.0005); // 0.5 ml por 1000L
+            const phUp = Math.round(volume * 0.015); // 15 gr por 1000L
+            const phDown = Math.round(volume * 0.025); // 25 gr por 1000L
+            const alkalinityUp = Math.round(volume * 0.01); // 10 gr por 1000L
+
+            // Mostrar resultados numéricos
+            document.getElementById('volume').innerText = `${volume.toLocaleString()} L`;
+            document.getElementById('shock').innerText = `${shock.toLocaleString()} g`;
+            document.getElementById('maintenance').innerText = `${maintenance.toLocaleString()} g`;
+            document.getElementById('algaecide').innerText = `${algaecide.toLocaleString()} ml`;
+            document.getElementById('flocculant').innerText = `${flocculant.toLocaleString()} ml`;
+            document.getElementById('phUp').innerText = `${phUp.toLocaleString()} g`;
+            document.getElementById('phDown').innerText = `${phDown.toLocaleString()} g`;
+            document.getElementById('alkalinityUp').innerText = `${alkalinityUp.toLocaleString()} g`;
+
+            document.getElementById('resultsNumbers').style.display = 'block';
+
+            // Generar plan de acción
+            let steps = [];
+            switch(waterCondition) {
+                case "cristalina":
+                    steps = [
+                        "Agregar cloro de mantenimiento semanal.",
+                        "Revisar pH y alcalinidad con kit de prueba.",
+                        "Cepillar paredes y escaleras para prevenir algas.",
+                        "Aspirar el fondo de la piscina."
+                    ];
+                    break;
+                case "turbia":
+                    steps = [
+                        `Ajustar pH a 7.4. ${phLevel ? (phLevel < 7.2 ? `Agregar ${phUp}g de pH Increasador.` : phLevel > 7.6 ? `Agregar ${phDown}g de pH Decreasador.` : "") : ""}`,
+                        `Agregar ${flocculant} ml de floculante.`,
+                        "Apagar la bomba y dejar reposar 8-12 horas (NO ENCENDER).",
+                        "Aspirar el fondo en modo 'Waste' (desecho) para eliminar sedimentos.",
+                        "Rellenar agua si el nivel bajó."
+                    ];
+                    break;
+                case "verde":
+                    steps = [
+                        "Cepillar vigorosamente paredes, escaleras y fondo para soltar algas.",
+                        `Ajustar pH a 7.4. ${phLevel ? (phLevel < 7.2 ? `Agregar ${phUp}g de pH Increasador.` : phLevel > 7.6 ? `Agregar ${phDown}g de pH Decreasador.` : "") : ""}`,
+                        `Agregar ${shock}g de cloro de choque.`,
+                        `Agregar ${algaecide} ml de algicida (seguir instrucciones del envase).`,
+                        "Dejar la bomba encendida 24-48 horas continuas.",
+                        "Aspirar residuos del fondo."
+                    ];
+                    break;
+                case "irrita":
+                    if (phLevel < 7.2) {
+                        steps = [
+                            `pH detectado: ${phLevel} (BAJO).`,
+                            `Agregar ${phUp}g de pH Increasador.`,
+                            "Esperar 4-6 horas con bomba encendida.",
+                            "Volver a medir pH. Repetir si es necesario hasta alcanzar 7.2 - 7.6."
+                        ];
+                    } else if (phLevel > 7.6) {
+                        steps = [
+                            `pH detectado: ${phLevel} (ALTO).`,
+                            `Agregar ${phDown}g de pH Decreasador.`,
+                            "Esperar 4-6 horas con bomba encendida.",
+                            "Volver a medir pH. Repetir si es necesario hasta alcanzar 7.2 - 7.6."
+                        ];
+                    } else {
+                        steps = [
+                            "pH en rango ideal (7.2 - 7.6).",
+                            "Revisar niveles de alcalinidad o cloraminas si la irritación persiste."
+                        ];
+                    }
+                    break;
+                case "oliente":
+                    steps = [
+                        "El olor indica presencia de cloraminas (cloro combinado).",
+                        `Aplicar SUPERCLORACIÓN: agregar ${shock * 1.5}g de cloro de choque (30g/1000L).`,
+                        "Dejar bomba encendida mínimo 12 horas.",
+                        "El olor desaparecerá cuando el cloro libre rompa las cloraminas.",
+                        "Volver a medir cloro libre (ideal: 1-3 ppm)."
+                    ];
+                    break;
+                default:
+                    steps = ["Sigue las recomendaciones generales según el estado del agua."];
+            }
+
+            // Renderizar pasos
+            const actionStepsDiv = document.getElementById('actionSteps');
+            actionStepsDiv.innerHTML = steps.map(step => `<div class="step">${step}</div>`).join('');
+
+            document.getElementById('actionPlanSection').style.display = 'block';
+
+            // Actualizar campo de volumen en presupuesto
+            document.getElementById('budgetVolume').value = volume;
+        }
+
+        // Calcular presupuesto
+        function calculateBudget() {
+            const volume = parseFloat(document.getElementById('budgetVolume').value);
+            const frequency = parseInt(document.getElementById('frequency').value);
+            const laborCost = parseFloat(document.getElementById('laborCost').value);
+
+            if (!volume || volume <= 0) {
+                alert('¡Por favor, ingresa un volumen válido!');
+                return;
+            }
+
+            if (!laborCost || laborCost < 0) {
+                alert('¡Por favor, ingresa un costo de mano de obra válido!');
+                return;
+            }
+
+            // Cálculos de químicos mensuales (ajustados por frecuencia)
+            const monthlyChlorine = Math.round(volume * 0.005 * 4 * frequency); // 5gr/1000L por visita
+            const monthlyPh = Math.round(volume * 0.005 * 4); // 5gr/1000L mensual (ajuste mensual, no por visita)
+            const monthlyAlgaecide = Math.round(volume * 0.0005 * 4 * frequency); // 0.5ml/1000L por visita
+
+            // Precios promedio (puedes ajustarlos)
+            const chlorinePricePerKg = 5; // $5 por kg
+            const phPricePerKg = 4; // $4 por kg
+            const algaecidePricePerLiter = 15; // $15 por litro
+
+            // Costos
+            const chlorineCost = (monthlyChlorine / 1000) * chlorinePricePerKg;
+            const phCost = (monthlyPh / 1000) * phPricePerKg;
+            const algaecideCost = (monthlyAlgaecide / 1000) * algaecidePricePerLiter;
+            const laborTotal = laborCost * frequency * 4; // 4 semanas al mes
+            const totalCost = laborTotal + chlorineCost + phCost + algaecideCost;
+
+            // Mostrar resultados
+            document.getElementById('visitsPerMonth').innerText = frequency * 4;
+            document.getElementById('laborTotal').innerText = `$${laborTotal.toFixed(2)}`;
+            document.getElementById('chlorineAmount').innerText = monthlyChlorine.toLocaleString();
+            document.getElementById('chlorineCost').innerText = `$${chlorineCost.toFixed(2)}`;
+            document.getElementById('phAmount').innerText = monthlyPh.toLocaleString();
+            document.getElementById('phCost').innerText = `$${phCost.toFixed(2)}`;
+            document.getElementById('algaecideAmount').innerText = monthlyAlgaecide.toLocaleString();
+            document.getElementById('algaecideCost').innerText = `$${algaecideCost.toFixed(2)}`;
+            document.getElementById('totalCost').innerText = `$${totalCost.toFixed(2)}`;
+
+            document.getElementById('budgetResult').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

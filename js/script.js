@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 }); */
 
+
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("contactForm");
 
@@ -83,3 +84,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+
