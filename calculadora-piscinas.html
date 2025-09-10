@@ -325,13 +325,13 @@
                 <div class="results-numbers" id="resultsNumbers" style="display: none;">
                     <h3><i class="fas fa-hashtag"></i> Resultados Numéricos</h3>
                     <p><strong>Volumen estimado:</strong> <span class="highlight" id="volume">--</span> litros</p>
-                    <p><strong>Cloro de Choque:</strong> <span class="highlight" id="shock">--</span> gramos</p>
-                    <p><strong>Cloro de Mantenimiento:</strong> <span class="highlight" id="maintenance">--</span> gramos</p>
-                    <p><strong>Algicida (si aplica):</strong> <span class="highlight" id="algaecide">--</span> ml</p>
-                    <p><strong>Floculante (si aplica):</strong> <span class="highlight" id="flocculant">--</span> ml</p>
-                    <p><strong>pH Increasador (si pH < 7.2):</strong> <span class="highlight" id="phUp">--</span> gramos</p>
-                    <p><strong>pH Decreasador (si pH > 7.6):</strong> <span class="highlight" id="phDown">--</span> gramos</p>
-                    <p><strong>Aumentar Alcalinidad (si < 80 ppm):</strong> <span class="highlight" id="alkalinityUp">--</span> gramos</p>
+                    <p><strong>Cloro de Choque:</strong> <span class="highlight" id="shock">--</span> g <small>(<span id="shockLb">--</span> lb)</small></p>
+                    <p><strong>Cloro de Mantenimiento:</strong> <span class="highlight" id="maintenance">--</span> g <small>(<span id="maintenanceLb">--</span> lb)</small></p>
+                    <p><strong>Algicida (si aplica):</strong> <span class="highlight" id="algaecide">--</span> ml <small>(<span id="algaecideCc">--</span> cc)</small></p>
+                    <p><strong>Floculante (si aplica):</strong> <span class="highlight" id="flocculant">--</span> ml <small>(<span id="flocculantCc">--</span> cc)</small></p>
+                    <p><strong>pH Increasador (si pH < 7.2):</strong> <span class="highlight" id="phUp">--</span> g <small>(<span id="phUpLb">--</span> lb)</small></p>
+                    <p><strong>pH Decreasador (si pH > 7.6):</strong> <span class="highlight" id="phDown">--</span> g <small>(<span id="phDownLb">--</span> lb)</small></p>
+                    <p><strong>Aumentar Alcalinidad (si < 80 ppm):</strong> <span class="highlight" id="alkalinityUp">--</span> g <small>(<span id="alkalinityUpLb">--</span> lb)</small></p>
                 </div>
 
                 <!-- Recomendaciones y Plan de Acción -->
@@ -516,15 +516,33 @@
             const phDown = Math.round(volume * 0.025); // 25 gr por 1000L
             const alkalinityUp = Math.round(volume * 0.01); // 10 gr por 1000L
 
+            // Conversión a libras (1 lb = 453.592 g)
+            const shockLb = (shock / 453.592).toFixed(2);
+            const maintenanceLb = (maintenance / 453.592).toFixed(2);
+            const phUpLb = (phUp / 453.592).toFixed(2);
+            const phDownLb = (phDown / 453.592).toFixed(2);
+            const alkalinityUpLb = (alkalinityUp / 453.592).toFixed(2);
+
+            // Conversión ml a cc (1 ml = 1 cc)
+            const algaecideCc = algaecide;
+            const flocculantCc = flocculant;
+
             // Mostrar resultados numéricos
             document.getElementById('volume').innerText = `${volume.toLocaleString()} L`;
             document.getElementById('shock').innerText = `${shock.toLocaleString()} g`;
+            document.getElementById('shockLb').innerText = `${shockLb} lb`;
             document.getElementById('maintenance').innerText = `${maintenance.toLocaleString()} g`;
+            document.getElementById('maintenanceLb').innerText = `${maintenanceLb} lb`;
             document.getElementById('algaecide').innerText = `${algaecide.toLocaleString()} ml`;
+            document.getElementById('algaecideCc').innerText = `${algaecideCc} cc`;
             document.getElementById('flocculant').innerText = `${flocculant.toLocaleString()} ml`;
+            document.getElementById('flocculantCc').innerText = `${flocculantCc} cc`;
             document.getElementById('phUp').innerText = `${phUp.toLocaleString()} g`;
+            document.getElementById('phUpLb').innerText = `${phUpLb} lb`;
             document.getElementById('phDown').innerText = `${phDown.toLocaleString()} g`;
+            document.getElementById('phDownLb').innerText = `${phDownLb} lb`;
             document.getElementById('alkalinityUp').innerText = `${alkalinityUp.toLocaleString()} g`;
+            document.getElementById('alkalinityUpLb').innerText = `${alkalinityUpLb} lb`;
 
             document.getElementById('resultsNumbers').style.display = 'block';
 
