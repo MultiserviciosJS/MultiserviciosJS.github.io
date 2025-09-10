@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Océanos Caseros | Limpieza Profesional de Piscinas</title>
-    <link rel="shortcut icon" href="img/pool2.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>🌊 Calculadora Profesional de Piscinas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
             --primary: #00a8e8;
             --secondary: #0077be;
             --accent: #00d1b2;
-            --light: #f8fbff;
+            --light: #f0f9ff;
             --dark: #0a2540;
-            --sand: #f8f9fa;
+            --warning: #ff9800;
+            --danger: #f44336;
+            --success: #4caf50;
         }
 
         * {
@@ -26,431 +26,647 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--light);
+            background: linear-gradient(135deg, #e0f7ff, #f0fbff);
             color: #333;
-            line-height: 1.7;
+            line-height: 1.6;
+            padding: 20px;
         }
 
         .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            text-align: center;
-            padding: 100px 20px 60px;
-            position: relative;
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             overflow: hidden;
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,128L48,144C96,160,192,192,288,192C384,192,480,160,576,160C672,160,768,192,864,213.3C960,235,1056,245,1152,229.3C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center no-repeat;
-            background-size: cover;
-        }
-
-        .brand-tag {
-            background: rgba(255,255,255,0.2);
-            padding: 8px 24px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-bottom: 20px;
-            backdrop-filter: blur(5px);
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px;
+            text-align: center;
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
 
-        h2.subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            max-width: 700px;
-            margin: 0 auto 40px;
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
-        /* Navbar */
-        nav {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        .content {
+            padding: 40px;
         }
 
-        nav .container {
+        .tabs {
             display: flex;
-            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
-            gap: 20px;
+            justify-content: center;
         }
 
-        nav a {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 20px;
+        .tab {
+            padding: 12px 25px;
+            background: var(--light);
+            border: none;
             border-radius: 30px;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        nav a:hover {
+        .tab.active {
             background: var(--primary);
             color: white;
-            transform: translateY(-2px);
         }
 
-        /* Sections */
-        section {
-            padding: 80px 0;
+        .tab-content {
+            display: none;
         }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: 50px;
-            font-weight: 600;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
+        .tab-content.active {
             display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            margin: 15px auto 0;
-            border-radius: 2px;
         }
 
-        /* About */
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            flex-wrap: wrap;
+        .form-group {
+            margin-bottom: 25px;
         }
 
-        .about-image {
-            flex: 1 1 400px;
-            text-align: center;
-        }
-
-        .about-image i {
-            font-size: 6rem;
-            color: var(--primary);
-            background: rgba(0, 168, 232, 0.1);
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-        }
-
-        .about-text {
-            flex: 1 1 400px;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #555;
-        }
-
-        /* Services */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .service-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,168,232,0.15);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .service-card h3 {
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
             color: var(--secondary);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
         }
 
-        .service-card p {
-            color: #666;
-            margin-bottom: 20px;
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1f0fa;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
         }
 
         .btn {
-            display: inline-block;
+            display: block;
+            width: 100%;
+            padding: 15px;
             background: var(--primary);
             color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin: 30px 0;
         }
 
         .btn:hover {
             background: var(--secondary);
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--secondary), var(--dark));
-            color: white;
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .cta-section p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-
-        .btn-light {
-            background: white;
-            color: var(--secondary);
-        }
-
-        .btn-light:hover {
+        /* Resultados Numéricos */
+        .results-numbers {
             background: var(--light);
-            color: var(--primary);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid var(--primary);
         }
 
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 0 30px;
+        .results-numbers h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .results-numbers p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 5px 0;
+            display: inline-block;
+            min-width: 120px;
             text-align: center;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-            text-align: left;
+        /* Recomendaciones y Plan de Acción */
+        .action-plan {
+            background: #fff8e6;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid var(--warning);
         }
 
-        .footer-grid h4 {
-            color: var(--accent);
+        .action-plan h3 {
+            color: var(--warning);
             margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .footer-grid p, .footer-grid a {
-            color: #ccc;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .footer-grid a:hover {
-            color: var(--accent);
-        }
-
-        .copyright {
-            padding-top: 30px;
-            border-top: 1px solid #444;
-            color: #aaa;
-            font-size: 1rem;
-        }
-
-        /* WhatsApp Button */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            width: 60px;
-            height: 60px;
-            background: #25d366;
-            color: white;
-            border-radius: 50%;
+            font-size: 1.5rem;
             display: flex;
-            justify-content: center;
             align-items: center;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
-            text-decoration: none;
+            gap: 10px;
         }
 
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
+        .action-plan p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
         }
 
-        /* Responsive */
+        .step {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--success);
+            font-weight: 500;
+        }
+
+        /* Presupuesto */
+        .budget-result {
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid var(--success);
+        }
+
+        .budget-result h3 {
+            color: var(--success);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .budget-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #a5d6a7;
+        }
+
+        .budget-total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-align: right;
+            margin-top: 15px;
+        }
+
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2.subtitle { font-size: 1.2rem; }
-            .about-content { flex-direction: column; text-align: center; }
-            nav .container { justify-content: center; }
-            nav a { font-size: 0.9rem; padding: 6px 15px; }
+            .content {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <nav>
-        <div class="container">
-            <a href="index.html">← Volver a Multiservicios JS</a>
-            <a href="#about">Acerca de</a>
-            <a href="#services">Servicios</a>
-            <a href="calculadora-piscinas.html">Calculadora</a>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-water"></i> Calculadora Profesional de Piscinas</h1>
+            <p class="subtitle">Por Océanos Caseros — Tu aliado en agua cristalina</p>
+        </header>
+
+        <div class="content">
+            <div class="tabs">
+                <button class="tab active" data-tab="calculator">Calculadora</button>
+                <button class="tab" data-tab="guide">Guía por Estado del Agua</button>
+                <button class="tab" data-tab="budget">Presupuesto Mensual</button>
+            </div>
+
+            <!-- Pestaña: Calculadora -->
+            <div class="tab-content active" id="calculator">
+                <h2><i class="fas fa-calculator"></i> Calcula todo lo necesario</h2>
+                <p>Ingresa las medidas y el estado actual del agua. Te diremos exactamente qué hacer.</p>
+
+                <div class="form-group">
+                    <label for="shape"><i class="fas fa-shapes"></i> Forma de la piscina</label>
+                    <select id="shape" onchange="toggleFields()">
+                        <option value="rectangular">Rectangular / Cuadrada</option>
+                        <option value="redonda">Redonda</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="length"><i class="fas fa-arrows-alt-h"></i> Largo (metros)</label>
+                    <input type="number" id="length" placeholder="Ej: 6" step="0.1">
+                </div>
+
+                <div class="form-group" id="widthGroup">
+                    <label for="width"><i class="fas fa-arrows-alt-v"></i> Ancho (metros)</label>
+                    <input type="number" id="width" placeholder="Ej: 4" step="0.1">
+                </div>
+
+                <div class="form-group" id="diameterGroup" style="display: none;">
+                    <label for="diameter"><i class="fas fa-circle"></i> Diámetro (metros)</label>
+                    <input type="number" id="diameter" placeholder="Ej: 5" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="depth1"><i class="fas fa-water"></i> Profundidad más baja (metros)</label>
+                    <input type="number" id="depth1" placeholder="Ej: 1.2" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="depth2"><i class="fas fa-water"></i> Profundidad más honda (metros)</label>
+                    <input type="number" id="depth2" placeholder="Ej: 1.8" step="0.1">
+                </div>
+
+                <div class="form-group">
+                    <label for="waterCondition"><i class="fas fa-tint"></i> Estado actual del agua</label>
+                    <select id="waterCondition">
+                        <option value="cristalina">Cristalina (mantenimiento)</option>
+                        <option value="turbia">Turbia (partículas suspendidas)</option>
+                        <option value="verde">Verde (algas)</option>
+                        <option value="irrita">Irrita ojos (pH desbalanceado)</option>
+                        <option value="oliente">Huele a cloro (cloraminas)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="phLevel"><i class="fas fa-flask"></i> pH actual (si lo conoces)</label>
+                    <input type="number" id="phLevel" placeholder="Ej: 7.8" step="0.1" min="0" max="14">
+                </div>
+
+                <button class="btn" onclick="calculateAll()">
+                    <i class="fas fa-magic"></i> Calcular y Recomendar
+                </button>
+
+                <!-- Resultados Numéricos -->
+                <div class="results-numbers" id="resultsNumbers" style="display: none;">
+                    <h3><i class="fas fa-hashtag"></i> Resultados Numéricos</h3>
+                    <p><strong>Volumen estimado:</strong> <span class="highlight" id="volume">--</span> litros</p>
+                    <p><strong>Cloro de Choque:</strong> <span class="highlight" id="shock">--</span> g <small>(<span id="shockLb">--</span> lb)</small></p>
+                    <p><strong>Cloro de Mantenimiento:</strong> <span class="highlight" id="maintenance">--</span> g <small>(<span id="maintenanceLb">--</span> lb)</small></p>
+                    <p><strong>Algicida (si aplica):</strong> <span class="highlight" id="algaecide">--</span> ml <small>(<span id="algaecideCc">--</span> cc)</small></p>
+                    <p><strong>Floculante (si aplica):</strong> <span class="highlight" id="flocculant">--</span> ml <small>(<span id="flocculantCc">--</span> cc)</small></p>
+                    <p><strong>pH Increasador (si pH < 7.2):</strong> <span class="highlight" id="phUp">--</span> g <small>(<span id="phUpLb">--</span> lb)</small></p>
+                    <p><strong>pH Decreasador (si pH > 7.6):</strong> <span class="highlight" id="phDown">--</span> g <small>(<span id="phDownLb">--</span> lb)</small></p>
+                    <p><strong>Aumentar Alcalinidad (si < 80 ppm):</strong> <span class="highlight" id="alkalinityUp">--</span> g <small>(<span id="alkalinityUpLb">--</span> lb)</small></p>
+                </div>
+
+                <!-- Recomendaciones y Plan de Acción -->
+                <div class="action-plan" id="actionPlanSection" style="display: none;">
+                    <h3><i class="fas fa-clipboard-list"></i> Recomendaciones y Plan de Acción</h3>
+                    <div id="actionSteps">
+                        <!-- Los pasos se generarán aquí dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña: Guía por Estado del Agua -->
+            <div class="tab-content" id="guide">
+                <h2><i class="fas fa-book-medical"></i> Guía por Estado del Agua</h2>
+                <p>¿No sabes qué hacer? Elige el estado de tu piscina y sigue los pasos.</p>
+
+                <div class="action-plan">
+                    <h3><i class="fas fa-check-circle"></i> Agua Cristalina (Mantenimiento)</h3>
+                    <div class="step">1. Agregar cloro de mantenimiento semanal.</div>
+                    <div class="step">2. Revisar pH y alcalinidad.</div>
+                    <div class="step">3. Cepillar paredes y escaleras.</div>
+                    <div class="step">4. Aspirar fondo de la piscina.</div>
+                </div>
+
+                <div class="action-plan">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Agua Turbia (Partículas Suspendidas)</h3>
+                    <div class="step">1. Ajustar pH a 7.4.</div>
+                    <div class="step">2. Agregar floculante según dosis calculada.</div>
+                    <div class="step">3. Apagar bomba y dejar reposar 8-12 horas.</div>
+                    <div class="step">4. Aspirar fondo en modo "Waste" (desecho).</div>
+                    <div class="step">5. Rellenar agua si es necesario.</div>
+                </div>
+
+                <div class="action-plan">
+                    <h3><i class="fas fa-skull-crossbones"></i> Agua Verde (Algas)</h3>
+                    <div class="step">1. Cepillar vigorosamente paredes y fondo.</div>
+                    <div class="step">2. Ajustar pH a 7.4.</div>
+                    <div class="step">3. Agregar cloro de choque (dosificación calculada).</div>
+                    <div class="step">4. Agregar algicida (seguir instrucciones del envase).</div>
+                    <div class="step">5. Dejar bomba encendida 24-48 horas continuas.</div>
+                    <div class="step">6. Aspirar residuos del fondo.</div>
+                </div>
+
+                <div class="action-plan">
+                    <h3><i class="fas fa-eye"></i> Irrita Ojos (pH Desbalanceado)</h3>
+                    <div class="step">1. Medir pH con kit de prueba.</div>
+                    <div class="step">2. Si pH < 7.2 → Agregar pH Increasador (dosificación calculada).</div>
+                    <div class="step">3. Si pH > 7.6 → Agregar pH Decreasador (dosificación calculada).</div>
+                    <div class="step">4. Esperar 4-6 horas con bomba encendida.</div>
+                    <div class="step">5. Volver a medir pH hasta que esté en rango (7.2 - 7.6).</div>
+                </div>
+
+                <div class="action-plan">
+                    <h3><i class="fas fa-wind"></i> Huele a Cloro (Cloraminas)</h3>
+                    <div class="step">1. Aplicar cloro de choque (supercloración) — usar 30 gr/1000L.</div>
+                    <div class="step">2. Dejar bomba encendida mínimo 12 horas.</div>
+                    <div class="step">3. El olor desaparecerá cuando el cloro libre rompa las cloraminas.</div>
+                    <div class="step">4. Volver a medir cloro libre (ideal: 1-3 ppm).</div>
+                </div>
+            </div>
+
+            <!-- Pestaña: Presupuesto Mensual -->
+            <div class="tab-content" id="budget">
+                <h2><i class="fas fa-file-invoice-dollar"></i> Calcula el Presupuesto Mensual</h2>
+                <p>Calcula el costo estimado mensual para tu cliente, incluyendo químicos y mano de obra.</p>
+
+                <div class="form-group">
+                    <label for="budgetVolume"><i class="fas fa-cube"></i> Volumen de la piscina (litros)</label>
+                    <input type="number" id="budgetVolume" placeholder="Ej: 36000" min="0">
+                    <small class="text-muted">Si ya calculaste el volumen, se llenará automáticamente.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="frequency"><i class="fas fa-calendar-alt"></i> Frecuencia de servicio</label>
+                    <select id="frequency">
+                        <option value="1">1 vez por semana</option>
+                        <option value="2">2 veces por semana</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="laborCost"><i class="fas fa-hand-holding-usd"></i> Costo de Mano de Obra por Visita ($)</label>
+                    <input type="number" id="laborCost" placeholder="Ej: 15" value="15" min="0" step="0.5">
+                </div>
+
+                <button class="btn" onclick="calculateBudget()">
+                    <i class="fas fa-calculator"></i> Calcular Presupuesto Mensual
+                </button>
+
+                <div class="budget-result" id="budgetResult" style="display: none;">
+                    <h3><i class="fas fa-receipt"></i> Desglose del Presupuesto Mensual</h3>
+                    <div class="budget-item">
+                        <span>Mano de obra (4 semanas x <span id="visitsPerMonth">--</span> visitas)</span>
+                        <span id="laborTotal">--</span>
+                    </div>
+                    <div class="budget-item">
+                        <span>Cloro de mantenimiento (<span id="chlorineAmount">--</span> gr/mes)</span>
+                        <span id="chlorineCost">--</span>
+                    </div>
+                    <div class="budget-item">
+                        <span>pH Increasador/Decreasador (<span id="phAmount">--</span> gr/mes)</span>
+                        <span id="phCost">--</span>
+                    </div>
+                    <div class="budget-item">
+                        <span>Algicida (<span id="algaecideAmount">--</span> ml/mes)</span>
+                        <span id="algaecideCost">--</span>
+                    </div>
+                    <div class="budget-total">
+                        <strong>Total Mensual Estimado: <span id="totalCost">--</span></strong>
+                    </div>
+                    <p class="mt-3"><small>*Precios de químicos basados en promedio de mercado. Ajusta según tus costos reales.</small></p>
+                </div>
+            </div>
         </div>
-    </nav>
+    </div>
 
-    <header>
-        <div class="container">
-            <div class="brand-tag">Una división especializada de Multiservicios JS</div>
-            <h1>🌊 Océanos Caseros</h1>
-            <h2 class="subtitle">Limpieza Profesional de Piscinas • Agua Cristalina en 24 Horas</h2>
-            <a href="#contact" class="btn btn-light">¡Agendar Servicio Ahora!</a>
-        </div>
-    </header>
+    <script>
+        // Variables globales para compartir volumen
+        let globalVolume = 0;
 
-    <main>
-        <!-- Acerca de Nosotros -->
-        <section id="about">
-            <div class="container">
-                <h2 class="section-title">Acerca de Nosotros</h2>
-                <div class="about-content">
-                    <div class="about-image">
-                        <i class="fas fa-swimmer"></i>
-                    </div>
-                    <div class="about-text">
-                        <p>En <strong>Océanos Caseros</strong>, somos la <strong>división especializada en limpieza de piscinas de Multiservicios JS</strong>. No somos una empresa aparte: somos el mismo equipo, con expertos dedicados exclusivamente al cuidado de tu piscina.</p>
-                        <p>¡Déjanos cuidarlo por ti!</p>
-                        <a href="#services" class="btn">Ver Nuestros Servicios</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        // Cambiar pestañas
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+            });
+        });
 
-        <!-- Servicios -->
-        <section id="services">
-            <div class="container">
-                <h2 class="section-title">Nuestros Servicios</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-broom"></i>
-                        </div>
-                        <h3>Limpieza Profunda</h3>
-                        <p>Aspirado de fondo, cepillado de paredes y escaleras, retiro de hojas y residuos. ¡Como nueva!</p>
-                        <a href="https://wa.me/50583293536" class="btn">Solicitar Servicio</a>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-flask"></i>
-                        </div>
-                        <h3>Balance Químico</h3>
-                        <p>Medición y ajuste de pH, cloro, alcalinidad y otros parámetros. Salud y seguridad garantizadas.</p>
-                        <a href="https://wa.me/50583293536" class="btn">Solicitar Servicio</a>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-filter"></i>
-                        </div>
-                        <h3>Limpieza de Filtros</h3>
-                        <p>Lavado profundo o reemplazo de cartuchos. Máximo rendimiento para tu sistema de filtración.</p>
-                        <a href="https://wa.me/50583293536" class="btn">Solicitar Servicio</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        // Mostrar/Ocultar campos según forma
+        function toggleFields() {
+            const shape = document.getElementById('shape').value;
+            const widthGroup = document.getElementById('widthGroup');
+            const diameterGroup = document.getElementById('diameterGroup');
 
-        <!-- CTA Final -->
-        <section class="cta-section" id="contact">
-            <div class="container">
-                <h2>¿Lista tu piscina para brillar?</h2>
-                <p>Agenda hoy y disfruta de agua cristalina en menos de 24 horas. ¡Primer diagnóstico GRATIS!</p>
-                <a href="https://wa.me/50583293536" class="btn btn-light">
-                    <i class="fab fa-whatsapp me-2"></i> ¡Escríbenos por WhatsApp!
-                </a>
-            </div>
-        </section>
-    </main>
+            if (shape === 'redonda') {
+                widthGroup.style.display = 'none';
+                diameterGroup.style.display = 'block';
+            } else {
+                widthGroup.style.display = 'block';
+                diameterGroup.style.display = 'none';
+            }
+        }
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <h4>Contacto</h4>
-                    <p><i class="fas fa-phone me-2"></i> +505 8329 3536</p>
-                    <p><i class="fas fa-envelope me-2"></i> jsmutiservicios@gmail.com</p>
-                    <p><i class="fas fa-map-marker-alt me-2"></i> Managua, Nicaragua</p>
-                </div>
-                <div>
-                    <h4>Enlaces</h4>
-                    <a href="index.html">Multiservicios JS</a>
-                    <a href="#about">Acerca de</a>
-                    <a href="#services">Servicios</a>
-                </div>
-                <div>
-                    <h4>Océanos Caseros</h4>
-                    <p>División especializada en limpieza de piscinas de Multiservicios JS.</p>
-                    
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2025 Océanos Caseros — Una división de <strong>Multiservicios JS</strong>
-            </div>
-        </div>
-    </footer>
+        // Calcular todo
+        function calculateAll() {
+            const shape = document.getElementById('shape').value;
+            const length = parseFloat(document.getElementById('length').value);
+            const width = parseFloat(document.getElementById('width').value);
+            const diameter = parseFloat(document.getElementById('diameter').value);
+            const depth1 = parseFloat(document.getElementById('depth1').value);
+            const depth2 = parseFloat(document.getElementById('depth2').value);
+            const waterCondition = document.getElementById('waterCondition').value;
+            const phLevel = parseFloat(document.getElementById('phLevel').value);
 
-    <!-- Botón de WhatsApp -->
-    <a href="https://wa.me/50583293536" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+            if (!length || (!width && shape !== 'redonda') || (!diameter && shape === 'redonda') || !depth1 || !depth2) {
+                alert('¡Por favor, completa todos los campos de medidas!');
+                return;
+            }
+
+            let volume = 0;
+
+            if (shape === 'rectangular') {
+                const avgDepth = (depth1 + depth2) / 2;
+                volume = length * width * avgDepth * 1000;
+            } else if (shape === 'redonda') {
+                const radius = diameter / 2;
+                const avgDepth = (depth1 + depth2) / 2;
+                volume = Math.PI * radius * radius * avgDepth * 1000;
+            }
+
+            volume = Math.round(volume);
+            globalVolume = volume; // Guardar para presupuesto
+
+            // Cálculos aproximados
+            const shock = Math.round(volume * 0.02); // 20 gr por 1000L
+            const maintenance = Math.round(volume * 0.005); // 5 gr por 1000L
+            const algaecide = Math.round(volume * 0.001); // 1 ml por 1000L
+            const flocculant = Math.round(volume * 0.0005); // 0.5 ml por 1000L
+            const phUp = Math.round(volume * 0.015); // 15 gr por 1000L
+            const phDown = Math.round(volume * 0.025); // 25 gr por 1000L
+            const alkalinityUp = Math.round(volume * 0.01); // 10 gr por 1000L
+
+            // Conversión a libras (1 lb = 453.592 g)
+            const shockLb = (shock / 453.592).toFixed(2);
+            const maintenanceLb = (maintenance / 453.592).toFixed(2);
+            const phUpLb = (phUp / 453.592).toFixed(2);
+            const phDownLb = (phDown / 453.592).toFixed(2);
+            const alkalinityUpLb = (alkalinityUp / 453.592).toFixed(2);
+
+            // Conversión ml a cc (1 ml = 1 cc)
+            const algaecideCc = algaecide;
+            const flocculantCc = flocculant;
+
+            // Mostrar resultados numéricos
+            document.getElementById('volume').innerText = `${volume.toLocaleString()} L`;
+            document.getElementById('shock').innerText = `${shock.toLocaleString()} g`;
+            document.getElementById('shockLb').innerText = `${shockLb} lb`;
+            document.getElementById('maintenance').innerText = `${maintenance.toLocaleString()} g`;
+            document.getElementById('maintenanceLb').innerText = `${maintenanceLb} lb`;
+            document.getElementById('algaecide').innerText = `${algaecide.toLocaleString()} ml`;
+            document.getElementById('algaecideCc').innerText = `${algaecideCc} cc`;
+            document.getElementById('flocculant').innerText = `${flocculant.toLocaleString()} ml`;
+            document.getElementById('flocculantCc').innerText = `${flocculantCc} cc`;
+            document.getElementById('phUp').innerText = `${phUp.toLocaleString()} g`;
+            document.getElementById('phUpLb').innerText = `${phUpLb} lb`;
+            document.getElementById('phDown').innerText = `${phDown.toLocaleString()} g`;
+            document.getElementById('phDownLb').innerText = `${phDownLb} lb`;
+            document.getElementById('alkalinityUp').innerText = `${alkalinityUp.toLocaleString()} g`;
+            document.getElementById('alkalinityUpLb').innerText = `${alkalinityUpLb} lb`;
+
+            document.getElementById('resultsNumbers').style.display = 'block';
+
+            // Generar plan de acción
+            let steps = [];
+            switch(waterCondition) {
+                case "cristalina":
+                    steps = [
+                        "Agregar cloro de mantenimiento semanal.",
+                        "Revisar pH y alcalinidad con kit de prueba.",
+                        "Cepillar paredes y escaleras para prevenir algas.",
+                        "Aspirar el fondo de la piscina."
+                    ];
+                    break;
+                case "turbia":
+                    steps = [
+                        `Ajustar pH a 7.4. ${phLevel ? (phLevel < 7.2 ? `Agregar ${phUp}g de pH Increasador.` : phLevel > 7.6 ? `Agregar ${phDown}g de pH Decreasador.` : "") : ""}`,
+                        `Agregar ${flocculant} ml de floculante.`,
+                        "Apagar la bomba y dejar reposar 8-12 horas (NO ENCENDER).",
+                        "Aspirar el fondo en modo 'Waste' (desecho) para eliminar sedimentos.",
+                        "Rellenar agua si el nivel bajó."
+                    ];
+                    break;
+                case "verde":
+                    steps = [
+                        "Cepillar vigorosamente paredes, escaleras y fondo para soltar algas.",
+                        `Ajustar pH a 7.4. ${phLevel ? (phLevel < 7.2 ? `Agregar ${phUp}g de pH Increasador.` : phLevel > 7.6 ? `Agregar ${phDown}g de pH Decreasador.` : "") : ""}`,
+                        `Agregar ${shock}g de cloro de choque.`,
+                        `Agregar ${algaecide} ml de algicida (seguir instrucciones del envase).`,
+                        "Dejar la bomba encendida 24-48 horas continuas.",
+                        "Aspirar residuos del fondo."
+                    ];
+                    break;
+                case "irrita":
+                    if (phLevel < 7.2) {
+                        steps = [
+                            `pH detectado: ${phLevel} (BAJO).`,
+                            `Agregar ${phUp}g de pH Increasador.`,
+                            "Esperar 4-6 horas con bomba encendida.",
+                            "Volver a medir pH. Repetir si es necesario hasta alcanzar 7.2 - 7.6."
+                        ];
+                    } else if (phLevel > 7.6) {
+                        steps = [
+                            `pH detectado: ${phLevel} (ALTO).`,
+                            `Agregar ${phDown}g de pH Decreasador.`,
+                            "Esperar 4-6 horas con bomba encendida.",
+                            "Volver a medir pH. Repetir si es necesario hasta alcanzar 7.2 - 7.6."
+                        ];
+                    } else {
+                        steps = [
+                            "pH en rango ideal (7.2 - 7.6).",
+                            "Revisar niveles de alcalinidad o cloraminas si la irritación persiste."
+                        ];
+                    }
+                    break;
+                case "oliente":
+                    steps = [
+                        "El olor indica presencia de cloraminas (cloro combinado).",
+                        `Aplicar SUPERCLORACIÓN: agregar ${shock * 1.5}g de cloro de choque (30g/1000L).`,
+                        "Dejar bomba encendida mínimo 12 horas.",
+                        "El olor desaparecerá cuando el cloro libre rompa las cloraminas.",
+                        "Volver a medir cloro libre (ideal: 1-3 ppm)."
+                    ];
+                    break;
+                default:
+                    steps = ["Sigue las recomendaciones generales según el estado del agua."];
+            }
+
+            // Renderizar pasos
+            const actionStepsDiv = document.getElementById('actionSteps');
+            actionStepsDiv.innerHTML = steps.map(step => `<div class="step">${step}</div>`).join('');
+
+            document.getElementById('actionPlanSection').style.display = 'block';
+
+            // Actualizar campo de volumen en presupuesto
+            document.getElementById('budgetVolume').value = volume;
+        }
+
+        // Calcular presupuesto
+        function calculateBudget() {
+            const volume = parseFloat(document.getElementById('budgetVolume').value);
+            const frequency = parseInt(document.getElementById('frequency').value);
+            const laborCost = parseFloat(document.getElementById('laborCost').value);
+
+            if (!volume || volume <= 0) {
+                alert('¡Por favor, ingresa un volumen válido!');
+                return;
+            }
+
+            if (!laborCost || laborCost < 0) {
+                alert('¡Por favor, ingresa un costo de mano de obra válido!');
+                return;
+            }
+
+            // Cálculos de químicos mensuales (ajustados por frecuencia)
+            const monthlyChlorine = Math.round(volume * 0.005 * 4 * frequency); // 5gr/1000L por visita
+            const monthlyPh = Math.round(volume * 0.005 * 4); // 5gr/1000L mensual (ajuste mensual, no por visita)
+            const monthlyAlgaecide = Math.round(volume * 0.0005 * 4 * frequency); // 0.5ml/1000L por visita
+
+            // Precios promedio (puedes ajustarlos)
+            const chlorinePricePerKg = 5; // $5 por kg
+            const phPricePerKg = 4; // $4 por kg
+            const algaecidePricePerLiter = 15; // $15 por litro
+
+            // Costos
+            const chlorineCost = (monthlyChlorine / 1000) * chlorinePricePerKg;
+            const phCost = (monthlyPh / 1000) * phPricePerKg;
+            const algaecideCost = (monthlyAlgaecide / 1000) * algaecidePricePerLiter;
+            const laborTotal = laborCost * frequency * 4; // 4 semanas al mes
+            const totalCost = laborTotal + chlorineCost + phCost + algaecideCost;
+
+            // Mostrar resultados
+            document.getElementById('visitsPerMonth').innerText = frequency * 4;
+            document.getElementById('laborTotal').innerText = `$${laborTotal.toFixed(2)}`;
+            document.getElementById('chlorineAmount').innerText = monthlyChlorine.toLocaleString();
+            document.getElementById('chlorineCost').innerText = `$${chlorineCost.toFixed(2)}`;
+            document.getElementById('phAmount').innerText = monthlyPh.toLocaleString();
+            document.getElementById('phCost').innerText = `$${phCost.toFixed(2)}`;
+            document.getElementById('algaecideAmount').innerText = monthlyAlgaecide.toLocaleString();
+            document.getElementById('algaecideCost').innerText = `$${algaecideCost.toFixed(2)}`;
+            document.getElementById('totalCost').innerText = `$${totalCost.toFixed(2)}`;
+
+            document.getElementById('budgetResult').style.display = 'block';
+        }
+    </script>
 </body>
-
-
 </html>
