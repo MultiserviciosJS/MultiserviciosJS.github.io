@@ -1,456 +1,606 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Océanos Caseros | Limpieza Profesional de Piscinas</title>
-    <link rel="shortcut icon" href="img/pool2.png" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #00a8e8;
-            --secondary: #0077be;
-            --accent: #00d1b2;
-            --light: #f8fbff;
-            --dark: #0a2540;
-            --sand: #f8f9fa;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Océanos Caseros | Limpieza Profesional de Piscinas</title>
+  <link rel="shortcut icon" href="img/pool2.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #00a8e8;
+      --secondary: #0077be;
+      --accent: #00d1b2;
+      --light: #f8fbff;
+      --dark: #0a2540;
+      --sand: #f8f9fa;
+      --success: #28a745;
+      --warning: #ffc107;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--light);
-            color: #333;
-            line-height: 1.7;
-        }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--light);
+      color: #333;
+      line-height: 1.7;
+    }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            text-align: center;
-            padding: 100px 20px 60px;
-            position: relative;
-            overflow: hidden;
-        }
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+      padding: 120px 20px 80px;
+      position: relative;
+      overflow: hidden;
+    }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,128L48,144C96,160,192,192,288,192C384,192,480,160,576,160C672,160,768,192,864,213.3C960,235,1056,245,1152,229.3C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center no-repeat;
-            background-size: cover;
-        }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,128L48,144C96,160,192,192,288,192C384,192,480,160,576,160C672,160,768,192,864,213.3C960,235,1056,245,1152,229.3C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center no-repeat;
+      background-size: cover;
+    }
 
-        .brand-tag {
-            background: rgba(255,255,255,0.2);
-            padding: 8px 24px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-bottom: 20px;
-            backdrop-filter: blur(5px);
-        }
+    .brand-tag {
+      background: rgba(255,255,255,0.2);
+      padding: 8px 24px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 20px;
+      backdrop-filter: blur(5px);
+    }
 
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
 
-        h2.subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
+    h2.subtitle {
+      font-size: 1.5rem;
+      font-weight: 300;
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
 
-        /* Navbar */
-        nav {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+    /* Navbar */
+    nav {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+    }
 
-        nav .container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
+    nav .container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
 
-        nav a {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 20px;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
+    nav a {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
 
-        nav a:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
+    nav a:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
 
-        /* Sections */
-        section {
-            padding: 80px 0;
-        }
+    /* Botón de menú móvil */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: 50px;
-            font-weight: 600;
-            position: relative;
-        }
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            margin: 15px auto 0;
-            border-radius: 2px;
-        }
+      nav .container {
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
 
-        /* About */
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
+      nav.nav-active .container {
+        max-height: 500px;
+      }
+    }
 
-        .about-image {
-            flex: 1 1 400px;
-            text-align: center;
-        }
+    /* Sections */
+    section {
+      padding: 80px 0;
+    }
 
-        .about-image i {
-            font-size: 6rem;
-            color: var(--primary);
-            background: rgba(0, 168, 232, 0.1);
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-        }
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 50px;
+      font-weight: 600;
+      position: relative;
+    }
 
-        .about-text {
-            flex: 1 1 400px;
-        }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      margin: 15px auto 0;
+      border-radius: 2px;
+    }
 
-        .about-text p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #555;
-        }
+    /* About */
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
 
-        /* Services */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
+    .about-image {
+      flex: 1 1 400px;
+      text-align: center;
+    }
 
-        .service-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
+    .about-image i {
+      font-size: 6rem;
+      color: var(--primary);
+      background: rgba(0, 168, 232, 0.1);
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+    }
 
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,168,232,0.15);
-        }
+    .about-text {
+      flex: 1 1 400px;
+    }
 
-        .service-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
+    .about-text p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #555;
+    }
 
-        .service-card h3 {
-            color: var(--secondary);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
+    /* Services Cards */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
 
-        .service-card p {
-            color: #666;
-            margin-bottom: 20px;
-        }
+    .service-card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      border-top: 5px solid var(--primary);
+    }
 
-        .btn {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,168,232,0.15);
+    }
 
-        .btn:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+    .service-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
 
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--secondary), var(--dark));
-            color: white;
-            text-align: center;
-            padding: 80px 20px;
-        }
+    .service-card h3 {
+      color: var(--secondary);
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
 
-        .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
+    .service-card p {
+      color: #555;
+      margin-bottom: 20px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
 
-        .cta-section p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
+    /* Warning Section */
+    .warning-section {
+      background: #fff3cd;
+      border-left: 5px solid #ffc107;
+      padding: 30px;
+      border-radius: 10px;
+      margin: 40px auto;
+      max-width: 900px;
+    }
 
-        .btn-light {
-            background: white;
-            color: var(--secondary);
-        }
+    .warning-title {
+      color: #856404;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
 
-        .btn-light:hover {
-            background: var(--light);
-            color: var(--primary);
-        }
+    .warning-list {
+      list-style: none;
+      padding: 0;
+    }
 
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 0 30px;
-            text-align: center;
-        }
+    .warning-list li {
+      margin-bottom: 15px;
+      color: #856404;
+      font-weight: 500;
+    }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-            text-align: left;
-        }
+    .warning-list li::before {
+      content: "⚠️";
+      margin-right: 10px;
+    }
 
-        .footer-grid h4 {
-            color: var(--accent);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
 
-        .footer-grid p, .footer-grid a {
-            color: #ccc;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-        }
+    .btn:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
 
-        .footer-grid a:hover {
-            color: var(--accent);
-        }
+    .btn-success {
+      background: var(--success);
+    }
 
-        .copyright {
-            padding-top: 30px;
-            border-top: 1px solid #444;
-            color: #aaa;
-            font-size: 1rem;
-        }
+    .btn-success:hover {
+      background: #218838;
+    }
 
-        /* WhatsApp Button */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            width: 60px;
-            height: 60px;
-            background: #25d366;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
-            text-decoration: none;
-        }
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--secondary), var(--dark));
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
 
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
-        }
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2.subtitle { font-size: 1.2rem; }
-            .about-content { flex-direction: column; text-align: center; }
-            nav .container { justify-content: center; }
-            nav a { font-size: 0.9rem; padding: 6px 15px; }
-        }
-    </style>
+    .cta-section p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      opacity: 0.9;
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--secondary);
+    }
+
+    .btn-light:hover {
+      background: var(--light);
+      color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 60px 0 30px;
+      text-align: center;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+      text-align: left;
+    }
+
+    .footer-grid h4 {
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+
+    .footer-grid p, .footer-grid a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .footer-grid a:hover {
+      color: var(--accent);
+    }
+
+    .copyright {
+      padding-top: 30px;
+      border-top: 1px solid #444;
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      text-decoration: none;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      h2.subtitle { font-size: 1.2rem; }
+      .about-content { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
-
 <body>
-    <nav>
-        <div class="container">
-            <a href="index.html">← Volver a Multiservicios JS</a>
-            <a href="#about">Acerca de</a>
-            <a href="#services">Servicios</a>
-            <a href="calculadora-piscinas.html">Calculadora</a>
+
+  <!-- Botón de menú hamburguesa -->
+  <button class="menu-toggle" id="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Navbar -->
+  <nav id="main-nav">
+    <div class="container">
+      <a href="index.html">← Volver a Multiservicios JS</a>
+      <a href="#about">Acerca de</a>
+      <a href="#services">Servicios</a>
+      <a href="#signals">¿Cuándo contratar?</a>
+      <a href="#why">¿Por qué elegirnos?</a>
+      <a href="#contact">Contacto</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="container">
+    
+      <h1>🌊 Océanos Caseros</h1>
+      <h2 class="subtitle">Mantenimiento Profesional de Piscinas • Salud y Tranquilidad en un solo servicio</h2>
+        <div class="brand-tag">Tu piscina siempre lista, segura y cristalina</div>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- Acerca de Nosotros -->
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">Acerca de Nosotros</h2>
+        <div class="about-content">
+          <div class="about-image"><i class="fas fa-swimmer"></i></div>
+          <div class="about-text">
+            <p>En <strong>Océanos Caseros</strong>, somos la división de <strong>Multiservicios JS</strong> dedicada exclusivamente al <strong>cuidado profesional de piscinas</strong>.</p>
+            <p>No solo limpiamos: <strong>cuidamos tu salud, tu tiempo y tu inversión</strong>. Con químicos balanceados, tu piscina siempre estará lista para disfrutarse.</p>
+            <a href="#services" class="btn">Ver nuestros servicios</a>
+          </div>
         </div>
-    </nav>
+      </div>
+    </section>
 
-    <header>
-        <div class="container">
-            <div class="brand-tag">Una división especializada de Multiservicios JS</div>
-            <h1>🌊 Océanos Caseros</h1>
-            <h2 class="subtitle">Limpieza Profesional de Piscinas • Agua Cristalina en 24 Horas</h2>
-            <a href="#contact" class="btn btn-light">¡Agendar Servicio Ahora!</a>
+    <!-- Servicios de Limpieza -->
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">🔧 Nuestros Servicios de Limpieza</h2>
+        <div class="services-grid">
+          <!-- Limpieza Semanal -->
+          <div class="service-card">
+            <i class="fas fa-calendar-week service-icon"></i>
+            <h3>Limpieza Semanal</h3>
+            <p>La limpieza semanal es un servicio regular que incluye aspirado, desnatado y análisis del agua. Limpiamos todo, desde el filtro hasta el fondo y el revestimiento de la piscina.</p>
+            <a href="https://wa.me/50585377733" class="btn">Agendar ahora</a>
+          </div>
+
+          <!-- Limpieza Profunda -->
+          <div class="service-card">
+            <i class="fas fa-spa service-icon"></i>
+            <h3>Limpieza Profunda</h3>
+            <p>Nuestros servicios de limpieza profunda restauran tu piscina al mejor estado:</p>
+            <ul style="text-align: left; margin: 15px 0;">
+              <li><strong>Limpieza de filtros:</strong> Evita daños por presión incorrecta.</li>
+              <li><strong>De verde a limpio:</strong> Eliminación de algas</li>
+              <li><strong>Aspirado de fondo</strong></li>
+              <li><strong>cepillado de paredes y escaleras</strong></li> 
+              <li><strong>retiro de hojas y residuos.</strong></li> <strong style="text-shadow: #25d366;"> ¡Como nueva!</strong></li>
+            </ul>
+            <a href="https://wa.me/50585377733" class="btn">Pedir limpieza profunda</a>
+          </div>
+
+          <!-- Balance quimico -->
+          <div class="service-card">
+            <i class="fas fa-vial service-icon"></i>
+            <h3>Balance Químico</h3>
+            <p>Medición y ajuste de pH, cloro, alcalinidad y otros parámetros. Salud y seguridad garantizadas.</p>
+            <p></p>
+
+            <a href="https://wa.me/50585377733" class="btn">Consultar precio</a>
+          </div>
         </div>
-    </header>
+      </div>
+    </section>
 
-    <main>
-        <!-- Acerca de Nosotros -->
-        <section id="about">
-            <div class="container">
-                <h2 class="section-title">Acerca de Nosotros</h2>
-                <div class="about-content">
-                    <div class="about-image">
-                        <i class="fas fa-swimmer"></i>
-                    </div>
-                    <div class="about-text">
-                        <p>En <strong>Océanos Caseros</strong>, somos la <strong>división especializada en limpieza de piscinas de Multiservicios JS</strong>. No somos una empresa aparte: somos el mismo equipo, con expertos dedicados exclusivamente al cuidado de tu piscina.</p>
-                        <p>Utilizamos productos ecológicos, técnicas certificadas y un proceso de 5 pasos para garantizar que tu piscina quede impecable: agua cristalina, paredes limpias, filtros optimizados y químicos perfectamente balanceados.</p>
-                        <p>Tu piscina es tu oasis personal. ¡Déjanos cuidarlo por ti!</p>
-                        <a href="#services" class="btn">Ver Nuestros Servicios</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Servicios -->
-        <section id="services">
-            <div class="container">
-                <h2 class="section-title">Nuestros Servicios</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-broom"></i>
-                        </div>
-                        <h3>Limpieza Profunda</h3>
-                        <p>Aspirado de fondo, cepillado de paredes y escaleras, retiro de hojas y residuos. ¡Como nueva!</p>
-                        <a href="https://wa.me/50583293536" class="btn">Solicitar Servicio</a>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-flask"></i>
-                        </div>
-                        <h3>Balance Químico</h3>
-                        <p>Medición y ajuste de pH, cloro, alcalinidad y otros parámetros. Salud y seguridad garantizadas.</p>
-                        <a href="https://wa.me/50583293536" class="btn">Solicitar Servicio</a>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-filter"></i>
-                        </div>
-                        <h3>Limpieza de Filtros</h3>
-                        <p>Lavado profundo o reemplazo de cartuchos. Máximo rendimiento para tu sistema de filtración.</p>
-                        <a href="https://wa.me/50583293536" class="btn">Solicitar Servicio</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Final -->
-        <section class="cta-section" id="contact">
-            <div class="container">
-                <h2>¿Lista tu piscina para brillar?</h2>
-                <p>Agenda hoy y disfruta de agua cristalina en menos de 24 horas. ¡Primer diagnóstico GRATIS!</p>
-                <a href="https://wa.me/50583293536" class="btn btn-light">
-                    <i class="fab fa-whatsapp me-2"></i> ¡Escríbenos por WhatsApp!
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <h4>Contacto</h4>
-                    <p><i class="fas fa-phone me-2"></i> +505 8329 3536</p>
-                    <p><i class="fas fa-envelope me-2"></i> jsmutiservicios@gmail.com</p>
-                    <p><i class="fas fa-map-marker-alt me-2"></i> Managua, Nicaragua</p>
-                </div>
-                <div>
-                    <h4>Enlaces</h4>
-                    <a href="index.html">Multiservicios JS</a>
-                    <a href="#about">Acerca de</a>
-                    <a href="#services">Servicios</a>
-                </div>
-                <div>
-                    <h4>Océanos Caseros</h4>
-                    <p>División especializada en limpieza de piscinas de Multiservicios JS.</p>
-                    <p>Profesionales certificados, resultados garantizados.</p>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2025 Océanos Caseros — Una división de <strong>Multiservicios JS</strong>
-            </div>
+    <!-- Señales de advertencia -->
+    <section id="signals">
+      <div class="container">
+        <h2 class="section-title">⚠️ ¿Necesitas una limpieza profesional?</h2>
+        <div class="warning-section">
+          <p class="warning-title">Si notas alguna de estas señales, ¡tu piscina necesita atención inmediata!</p>
+          <ul class="warning-list">
+            <li><strong>Agua descolorida:</strong> Verde, marrón o amarilla → algas o bacterias.</li>
+            <li><strong>Insectos en el agua:</strong> Mosquitos, jejenes o ácaros → ambiente insalubre.</li>
+            <li><strong>Irritación en piel y ojos:</strong> Desequilibrio químico peligroso.</li>
+            <li><strong>Incrustaciones:</strong> Acumulación de calcio en azulejos → pH alto.</li>
+            <li><strong>Burbujas o espuma:</strong> Contaminantes como lociones o jabones.</li>
+          </ul>
+          <p class="text-center mt-4">
+            <a href="https://wa.me/50585377733" class="btn btn-success">¡Sí, mi piscina tiene estos problemas!</a>
+          </p>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <!-- Botón de WhatsApp -->
-    <a href="https://wa.me/50583293536" class="whatsapp-btn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- Por qué elegirnos -->
+    <section id="why" style="background:var(--sand);">
+      <div class="container">
+        <h2 class="section-title">¿Por qué elegirnos?</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <i class="fas fa-clock service-icon"></i>
+            <h3>Ahorro de tiempo</h3>
+            <p>No más horas de esfuerzo ni preocupaciones. Tu piscina lista sin mover un dedo.</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-hand-holding-heart service-icon"></i>
+            <h3>Seguridad</h3>
+            <p>Productos certificados y dosificados correctamente. Agua sana para tu familia.</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-dollar-sign service-icon"></i>
+            <h3>Inversión inteligente</h3>
+            <p>Evita daños costosos en la bomba o filtros con mantenimiento preventivo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="contact">
+      <div class="container">
+        <h2>Agenda tu servicio hoy</h2>
+        <p><br>Recupera tu oasis familiar en menos de 5 días.</p>
+        <a href="https://wa.me/50585377733" class="btn btn-light">
+          <i class="fab fa-whatsapp me-2"></i> ¡Escríbenos por WhatsApp!
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Contacto</h4>
+          <p><i class="fas fa-phone me-2"></i> +505 85377733</p>
+          <p><i class="fas fa-envelope me-2"></i> jsmutiservicios@gmail.com</p>
+          <p><i class="fas fa-map-marker-alt me-2"></i> Managua, Nicaragua</p>
+        </div>
+        <div>
+          <h4>Enlaces</h4>
+          <a href="#about">Acerca de</a>
+          <a href="#services">Servicios</a>
+          <a href="#signals">¿Cuándo contratar?</a>
+          <a href="#why">¿Por qué elegirnos?</a>
+        </div>
+        <div>
+          <h4>Océanos Caseros</h4>
+          <p>División especializada en limpieza de piscinas de Multiservicios JS.</p>
+         
+          
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2025 Océanos Caseros — Una división de <strong>Multiservicios JS</strong>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón WhatsApp -->
+  <a href="https://wa.me/50585377733" class="whatsapp-btn" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Script para el menú móvil -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.getElementById('menu-toggle');
+      const mainNav = document.getElementById('main-nav');
+
+      menuToggle.addEventListener('click', function() {
+        mainNav.classList.toggle('nav-active');
+      });
+    });
+  </script>
 </body>
-
 </html>
